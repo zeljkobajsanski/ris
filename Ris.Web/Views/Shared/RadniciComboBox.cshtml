@@ -1,0 +1,14 @@
+﻿@model Ris.Web.ViewModels.RadniciComboBox
+@Html.DevExpress().ComboBox(
+    cb =>
+    {
+        cb.Name = Model.Name;
+        cb.Properties.ClientInstanceName = "cmbRadnici";
+        cb.Properties.TextField = "ImeIPrezime";
+        cb.Properties.ValueType = typeof (int);
+        cb.Properties.ValueField = "ID";
+        cb.ControlStyle.CssClass = "editor";
+        cb.ShowModelErrors = true;
+        cb.Properties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.ImageWithText;
+    }
+).BindList(Model.Radnici).Bind(Model.IzabraniRadnik).GetHtml()

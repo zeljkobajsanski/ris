@@ -1,0 +1,31 @@
+﻿@model Ris.Web.ViewModels.RadniListViewModel
+@using (Html.BeginForm("Index", "RadniList", FormMethod.Get))
+{
+    @Html.DevExpress().DateEdit(
+    date =>
+    {
+        date.Name = "Datum";
+        date.ControlStyle.CssClass = "editor";
+    }).Bind(Model.Datum).GetHtml()
+
+    @Html.DevExpress().ComboBox(
+        cb =>
+            {
+                cb.Name = "Publikacija";
+                cb.Properties.TextField = "Naziv";
+                cb.Properties.ValueType = typeof (int);
+                cb.Properties.ValueField = "ID";
+                cb.ControlStyle.CssClass = "editor";
+            }
+    ).BindList(Model.PublikacijeLookup).Bind(Model.Publikacija).GetHtml()
+
+    @Html.DevExpress().Button(
+        b =>
+            {
+                b.Name = "btnPotvrdi";
+                b.Text = "Potvrdi";
+                b.UseSubmitBehavior = true;
+                b.ControlStyle.CssClass = "button";
+            }
+    ).GetHtml()    
+}

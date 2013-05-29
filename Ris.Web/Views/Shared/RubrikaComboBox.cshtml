@@ -1,0 +1,19 @@
+﻿@*@model Ris.Web.ViewModels.UnosTekstaViewModel*@
+@model Ris.Web.ViewModels.RubrikeViewModel
+
+@Html.DevExpress().ComboBox(s =>
+{
+    s.Name = Model.Name;
+    s.Properties.ClientInstanceName = "cmbRubrike";
+    s.ShowModelErrors = true;
+    s.Properties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.ImageWithText;
+    s.Properties.TextField = "Naziv";
+    s.Properties.ValueType = typeof (int);
+    s.Properties.ValueField = "ID";
+    s.CallbackRouteValues = new {action = "RubrikePartial", name = Model.Name};
+    s.Properties.ClientSideEvents.BeginCallback = Model.BeginCallback;
+    s.ControlStyle.CssClass = "editor";
+    s.Properties.Buttons.Add(new EditButton("X"));
+    s.Properties.ClientSideEvents.ButtonClick = "function(s, e) { if(e.buttonIndex === 0) {s.SetValue(null);} }";
+    s.Enabled = !Model.ReadOnly;
+}).BindList(Model.Rubrike).Bind(Model.IdRubrike).GetHtml()

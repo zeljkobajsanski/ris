@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Radni list";
+}
+@model Ris.Web.ViewModels.RadniListViewModel
+
+@section styles
+{
+    <link rel="stylesheet" href="@Url.Content("~/Content/radniList.css")"/>
+}
+@section scripts
+{
+    <script src="@Url.Content("~/Scripts/app/ris.radniList.js")"></script>
+}
+
+@Html.Partial("_Izbor")
+
+<div id="grid">
+    @Html.Partial("_RadniNaloziGrid", Model)
+</div>
+<div id="detalj">
+    @Html.DevExpress().ComboBox(
+        cb =>
+            {
+                cb.Name = "cmbTipAktivnosti";
+                cb.Properties.Items.Add("Novinar", "NT");
+                cb.Properties.Items.Add("Urednik", "UT");
+                cb.Properties.ClientSideEvents.ValueChanged = "RIS.RadniList.izabranTipTeksta";
+            }
+    ).GetHtml()
+    @Html.Partial("_RadniListNovinara", Model)
+</div>
+
+
+@{
+    if (!Model.Publikacija.HasValue)
+    {
+        <script>setTimeout(RIS.RadniList.prikaziIzbor, 500);</script>        
+    }
+}
+
+

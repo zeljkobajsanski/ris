@@ -1,0 +1,16 @@
+﻿@model HandleErrorInfo
+@{
+    ViewBag.Title = "Greška";
+}
+
+<div style="position: absolute; top: 20%; left: 50%; width: 400px; margin-left: -200px">
+    <img src="@Url.Content("~/Content/images/error.png")" alt="Error" style="float: left"/>
+    <div style="margin-left: 64px;">
+        <h2 style="margin-top: 0">Greška</h2>
+        <p>@Model.Exception.Message</p>    
+    </div>
+    
+</div>
+
+
+

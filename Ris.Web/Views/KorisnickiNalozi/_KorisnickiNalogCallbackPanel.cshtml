@@ -1,0 +1,12 @@
+﻿@model Ris.Web.ViewModels.KorisnickiNaloziViewModel
+
+@Html.DevExpress().CallbackPanel(
+    panel =>
+        {
+            panel.Name = "callbackPanel";
+            panel.CallbackRouteValues = new { action = "VratiKorisnickiNalog" };
+            panel.SetContent(() => Html.RenderPartial("_KorisnickiNalog", Model));
+            panel.ClientSideEvents.BeginCallback = "RIS.KorisnickiNalozi.callbackPanelBeginCallback";
+            panel.ClientSideEvents.EndCallback = "RIS.KorisnickiNalozi.callbackPanelEndCallback";
+        }
+).GetHtml()

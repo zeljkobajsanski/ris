@@ -1,0 +1,124 @@
+﻿@model Ris.Web.ViewModels.KorisnickiNaloziViewModel
+
+<div class="line">
+    @Html.DevExpress().Button(
+        btn =>
+            {
+                btn.Name = "btnNew";
+                btn.Text = "Novi";
+                btn.ClientSideEvents.Click = "RIS.KorisnickiNalozi.noviNalog";
+            }
+    ).GetHtml()
+</div>
+
+@using (@Ajax.BeginForm("Sacuvaj", new AjaxOptions()
+                                       {
+                                           OnBegin = "loader.Show()",
+                                           OnSuccess = "RIS.showSuccess('Podaci su uspešno sačuvani')",
+                                           OnFailure = "RIS.showError('Snimanje nije uspelo')",
+                                           OnComplete = "loader.Hide()"
+                                       }))
+{
+    @Html.HiddenFor(x => x.KorisnickiNalog.ID, new {id = "idKorisnika"})
+    <div class="line">
+        @Html.DevExpress().Label(
+            l =>
+            {
+                l.Text = "Korisničko ime";
+                l.AssociatedControlName = "KorisnickoIme";
+                l.ControlStyle.CssClass = "label";
+            }
+             ).GetHtml()
+        @Html.DevExpress().TextBox(
+            tb =>
+            {
+                tb.Name = "KorisnickiNalog.KorisnickoIme";
+                tb.Properties.ClientInstanceName = "korisnickoIme";
+                tb.ControlStyle.CssClass = "editor";
+                tb.ShowModelErrors = true;
+                tb.Properties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.ImageWithText;
+            }
+        ).Bind(Model.KorisnickiNalog.KorisnickoIme).GetHtml()
+    </div>
+    <div class="line">
+        @Html.DevExpress().Label(
+            l =>
+            {
+                l.Text = "Lozinka";
+                l.AssociatedControlName = "KorisnickiNalog.LozinkaPlain";
+                l.ControlStyle.CssClass = "label";
+            }
+             ).GetHtml()
+        @Html.DevExpress().TextBox(
+            tb =>
+            {
+                tb.Name = "KorisnickiNalog.LozinkaPlain";
+                tb.ControlStyle.CssClass = "editor";
+                tb.Properties.Password = true;
+            }
+        ).GetHtml()
+    </div>
+    <div class="line">
+        @Html.DevExpress().Label(
+            l =>
+            {
+                l.Text = "Radnik";
+                l.AssociatedControlName = "Radnik";
+                l.ControlStyle.CssClass = "label";
+            }
+             ).GetHtml()
+        @Html.Action("RadniciComboBox", new {idRadnika = Model.KorisnickiNalog.RadnikID})
+    </div>
+    <div class="line">
+        @Html.DevExpress().Label(
+            l =>
+            {
+                l.Name = "UlogeLabel";
+                l.Text = "Uloge";
+                l.AssociatedControlName = "Uloge";
+                l.ControlStyle.CssClass = "label";
+            }
+             ).GetHtml()
+        @Html.DevExpress().CheckBoxList(
+            cbl =>
+            {
+                cbl.Name = "UlogeRadnika";
+                cbl.Properties.TextField = "Naziv";
+                cbl.Properties.ValueType = typeof (int);
+                cbl.Properties.ValueField = "ID";
+                cbl.ControlStyle.CssClass = "editor";
+                cbl.PreRender = (sender, e) =>
+                {
+                    var editor = (ASPxCheckBoxList)sender;
+                    foreach (ListEditItem item in editor.Items)
+                    {
+                        if (Model.KorisnickiNalog.Radnik.UlogeRadnika.Any(x => x.ID == (int) item.Value))
+                        {
+                            item.Selected = true;
+                        }
+                    }
+                };
+            }
+        ).BindList(Model.Uloge).GetHtml()
+    </div>
+    <div class="line">
+        @Html.DevExpress().Button(
+            b =>
+            {
+                b.Name = "btnSave";
+                b.Text = "Sačuvaj";
+                b.ControlStyle.CssClass = "button";
+                b.UseSubmitBehavior = true;
+            }
+        ).GetHtml()
+    </div>
+}
+
+@Html.DevExpress().LoadingPanel(
+    loader =>
+        {
+            loader.Name = "loader";
+            loader.Text = "Snimanje podataka u toku...";
+            loader.ContainerElementID = "callbackPanel";
+        }
+).GetHtml()

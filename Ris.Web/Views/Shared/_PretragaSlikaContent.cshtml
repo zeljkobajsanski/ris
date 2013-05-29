@@ -1,0 +1,87 @@
+﻿@model Ris.Web.ViewModels.PretragaFotoArhiveViewModel
+<form id="pretragaSlika">
+    <div style="float: left">
+        @Html.DevExpress().ComboBox(s =>
+        {
+            s.Name = "publikacijaID";
+            s.Properties.TextField = "Naziv";
+            s.Properties.ValueType = typeof (int);
+            s.Properties.ValueField = "ID";
+            s.ControlStyle.CssClass = "editor";
+            s.Properties.NullDisplayText = "Publikacija";
+        }).BindList(Model.Publikacije).GetHtml()
+            
+        @Html.DevExpress().ComboBox(s =>
+        {
+            s.Name = "grupaMaterijalaID";
+            s.Properties.TextField = "Naziv";
+            s.Properties.ValueType = typeof (int);
+            s.Properties.ValueField = "ID";
+            s.ControlStyle.CssClass = "editor";
+            s.Properties.NullDisplayText = "Grupa materijala";
+        }).BindList(Model.GrupeMaterijala).GetHtml()
+    </div>
+    <div style="float: left">
+        @Html.DevExpress().TextBox(s =>
+        {
+            s.Name = "naziv";
+            s.Properties.NullText = "Naziv";
+            s.ControlStyle.CssClass = "editor";
+        }).GetHtml()
+
+        @Html.DevExpress().TextBox(s =>
+        {
+            s.Name = "tag";
+            s.Properties.NullText = "Tag";
+            s.ControlStyle.CssClass = "editor";
+        }).GetHtml()
+    </div>
+
+
+    <div style="clear: both; margin-left: 174px">
+        @Html.DevExpress().Button(s =>
+        {
+            s.Name = "btnPretrazi";
+            s.Text = "Pretraži";
+            s.UseSubmitBehavior = true;
+            s.ClientSideEvents.Click = "RIS.FotoArhiva.pretrazi";
+            //s.ControlStyle.CssClass = "button";
+            
+            s.Style.Add("float", "left");
+        }).GetHtml()    
+        @Html.DevExpress().Button(s =>
+        {
+            s.Name = "btnOtkazi";
+            s.Text = "Poništi";
+            s.ClientSideEvents.Click = "RIS.FotoArhiva.otkazi";
+            s.Style.Add("margin", "0 0 0 82px");
+            //s.ControlStyle.CssClass = "button";
+            
+        }).GetHtml()
+    </div>    
+</form>
+
+
+<div id="rezultati" style="height: 450px !important; width: 450px !important; overflow-y: scroll; margin-top: 2px">
+</div>
+
+@Html.DevExpress().LoadingPanel(s =>
+{
+    s.Name = "loader";
+    s.ContainerElementID = "rezultati";
+    s.Text = "Pretraga u toku...";
+}).GetHtml()
+
+@Html.DevExpress().Button(s =>
+{
+    s.Name = "btnIzaberi";
+    s.Text = "Izaberi";
+    s.ClientSideEvents.Click = "RIS.FotoArhiva.izabranaSlika";
+}).GetHtml()
+
+<script>
+    $("form#pretragaSlika").submit(function() {
+        "RIS.FotoArhiva.pretrazi()";
+        return false;
+    })
+</script>

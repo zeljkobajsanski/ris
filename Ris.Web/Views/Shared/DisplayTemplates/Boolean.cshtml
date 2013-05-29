@@ -1,0 +1,6 @@
+﻿@model Boolean?
+@Html.DevExpress().CheckBoxFor(m => m, s => {
+    s.ReadOnly = true;
+}).GetHtml()GetFullHtmlFieldName("") + "_dspl";
+    s.ReadOnly = true;
+}).Bind(Model).GetHtml()

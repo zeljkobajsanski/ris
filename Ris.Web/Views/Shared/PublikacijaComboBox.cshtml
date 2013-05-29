@@ -1,0 +1,18 @@
+﻿@model Ris.Web.ViewModels.PublikacijaViewModel
+
+@Html.DevExpress().ComboBox(s =>
+{
+    s.Name = Model.Name;
+    s.Properties.ClientInstanceName = "cmbPublikacije";
+    s.Properties.TextField = "Naziv";
+    s.Properties.ValueType = typeof (int);
+    s.Properties.ValueField = "ID";
+    s.ControlStyle.CssClass = "editor";
+    s.ShowModelErrors = true;
+    s.Properties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.ImageWithText;
+    //s.Properties.ValidationSettings.Display = Display.None;
+    s.Properties.ClientSideEvents.ValueChanged = Model.ValueChanged;
+    s.Properties.Buttons.Add(new EditButton("X"));
+    s.Properties.ClientSideEvents.ButtonClick = "function(s, e) { if(e.buttonIndex === 0) {s.SetValue(null);} }";
+    s.Enabled = !Model.ReadOnly;
+}).BindList(Model.Publikacije).Bind(Model.IdPublikacije).GetHtml()

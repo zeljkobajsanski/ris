@@ -1,0 +1,16 @@
+﻿@using System.Web.UI.WebControls
+@model Ris.Web.ViewModels.PretragaFotoArhiveViewModel
+
+@Html.DevExpress().PopupControl(s =>
+{
+    s.Name = "pretragaSlikaPopup";
+    s.Modal = true;
+    s.HeaderText = "Pretraga foto arhive";
+    s.PopupHorizontalAlign = PopupHorizontalAlign.WindowCenter;
+    s.PopupVerticalAlign = PopupVerticalAlign.WindowCenter;
+    //s.Width = Unit.Pixel(450);
+    //s.Height = Unit.Pixel(450);
+    s.SetContent(() => @Html.RenderPartial("_PretragaSlikaContent", Model));
+    s.ClientSideEvents.PopUp = "RIS.FotoArhiva.ocisti";
+    //s.ClientSideEvents.CloseUp = "closed";
+}).GetHtml()

@@ -1,0 +1,42 @@
+﻿@using System.Web.UI.WebControls
+@model Ris.Web.ViewModels.KomentariViewModel
+
+<div id="komentari">
+   @foreach (var komentar in Model.RanijiKomentari)
+    {
+        <div class="komentar">
+            <p><span class="komentarPoslao">@komentar.Poslao.ImeIPrezime</span><span class="datumSlanjaKomentara">@komentar.Datum.ToString("dd.MM.yyyy HH:mm")</span></p>
+            <p class="tekstKomentara">@komentar.TekstKomentara</p>
+        </div>
+    } 
+</div>
+
+<div id="ostaviKomentar">
+    @using (Ajax.BeginForm("PosaljiKomentar", new AjaxOptions
+                                                {
+                                                    OnSuccess = "komentariPopup.Hide()"
+                                                }))
+    {
+        @Html.HiddenFor(x => x.Komentar.TekstID)
+        @Html.DevExpress().Memo(
+            memo =>
+                {
+                    memo.Name = "Komentar.TekstKomentara";
+                    memo.Properties.ClientInstanceName = "komentarMemo";
+                    memo.Width = Unit.Pixel(390);
+                    memo.Height = Unit.Pixel(60);
+                    memo.Style.Add("margin-bottom", "4px");
+                }
+        ).Bind(Model.Komentar.TekstKomentara).GetHtml() 
+        @Html.DevExpress().Button(
+            btn =>
+                {
+                    btn.Name = "btnPosalji";
+                    btn.Text = "Pošalji";
+                    btn.UseSubmitBehavior = true;
+                    btn.ControlStyle.CssClass = "floatRight";
+                }
+        ).GetHtml()   
+    }    
+</div>
+

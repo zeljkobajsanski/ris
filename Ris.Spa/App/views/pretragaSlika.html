@@ -1,0 +1,19 @@
+﻿<section>
+    <form data-bind="submit: pretrazi" style="float: left">
+        <input type="text" data-bind="value: naziv" placeholder="Naziv" autofocus />
+        <div>
+            <input type="submit" value="Pretraži" class="k-button" />    
+        </div>
+        
+    </form>
+    <div style="width: 438px; height: 400px; overflow-y: scroll">
+        <div id="pics" data-bind="foreach: { data: slike, afterAdd: afterAdd }" >
+            <img class="pic" data-bind="attr: { src: Thumbnail }, click: $parent.izaberi" width="100" height="100" style="width: 100px; height: 100px"/> 
+        </div>
+    </div>
+    <div id="detaljanPrikaz" data-bind="kendoWindow: {isOpen: isOpen, title: 'Detaljan prikaz'}" style="width: 960px; height: 500px;">
+        <img data-bind="attr: { src: izabranaSlika }" style="height: 479px"/>
+        <button class="k-button" data-bind="click: preuzmi">Preuzmi</button>
+    </div>
+</section>
+

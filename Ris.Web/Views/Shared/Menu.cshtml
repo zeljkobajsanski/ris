@@ -1,0 +1,39 @@
+﻿<div id="menu">
+    <div style="float: left">
+    @Html.DevExpress().Menu(
+        menu =>
+            {
+                menu.Name = "mainMenu";
+                menu.Items.Add(agencija =>
+                                   {
+                                       agencija.Text = "Agencije";
+                                       agencija.Items.Add("Vesti", "vesti", @Url.Content("~/Content/images/inbox_16x16.png")).NavigateUrl = @Url.Action("Index", "AgencijskeVesti");
+                                   });
+                menu.Items.Add(redakcija =>
+                                   {
+                                       redakcija.Text = "Redakcija";
+                                       redakcija.Items.Add("Unos teksta", "unos_teksta", @Url.Content("~/Content/images/edit.png")).NavigateUrl = @Url.Action("UnosTeksta", "Redakcija");
+                                       redakcija.Items.Add("Pregled tekstova", "pregled_tekstova", @Url.Content("~/Content/images/preview_16.png")).NavigateUrl = @Url.Action("PregledTekstova", "Redakcija");
+                                   });
+                menu.Items.Add(foto =>
+                                   {
+                                       foto.Text = "Foto arhiva";
+                                       foto.Items.Add("Unos slika", "unos_slika", @Url.Content("~/Content/images/camera.png")).NavigateUrl = @Url.Action("Unos", "FotoArhiva");
+                                   });
+                menu.Items.Add(evidencija =>
+                                   {
+                                       evidencija.Text = "Evidencija učinka";
+                                       evidencija.Items.Add("Unos učinka").NavigateUrl = @Url.Action("Index", "RadniList");
+                                   });
+                menu.Items.Add(adm =>
+                {
+                    adm.Text = "Administracija";
+                    adm.Items.Add("Korisnički nalozi", "korisnicki_nalozi", @Url.Content("~/Content/images/user_group.png")).NavigateUrl = @Url.Action("Index", "KorisnickiNalozi");
+                });
+            }
+         ).GetHtml()    
+</div>
+<div style="float: right" id="userInfo">
+    @Html.Action("UserInfo", "Home")
+</div>
+</div>

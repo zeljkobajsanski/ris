@@ -1,0 +1,23 @@
+﻿@using System.Web.UI.WebControls
+@model Ris.Web.ViewModels.KorisnickiNaloziViewModel
+
+@Html.DevExpress().GridView(
+        gv =>
+        {
+            gv.Name = "gvKorisnickiNalozi";
+            gv.CallbackRouteValues = new {action = "Index"};
+            gv.Columns.Add("KorisnickoIme", "Korisničko ime");
+            var colRadnik = gv.Columns.Add("RadnikID", "Radnik");
+            colRadnik.ColumnType = MVCxGridViewColumnType.ComboBox;
+            var colRadnikEditor = (ComboBoxProperties) colRadnik.PropertiesEdit;
+            colRadnikEditor.TextField = "ImeIPrezime";
+            colRadnikEditor.ValueType = typeof (int);
+            colRadnikEditor.ValueField = "ID";
+            colRadnikEditor.DataSource = Model.Radnici;
+            gv.SettingsBehavior.AllowFocusedRow = true;
+            gv.KeyFieldName = "ID";
+            gv.Width = Unit.Percentage(100);
+            gv.ClientSideEvents.FocusedRowChanged = "RIS.KorisnickiNalozi.izabranNalog";
+            //gv.SettingsBehavior.AllowClientEventsOnLoad = false;
+        }
+).Bind(Model.KorisnickiNalozi).GetHtml()

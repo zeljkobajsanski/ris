@@ -1,0 +1,72 @@
+﻿<section style="background-color: white; ">
+    <button class="btn" data-bind="click: kopiraj">Kopiraj</button>
+    <button class="btn btn-danger" data-bind="click: obrisi">Obriši</button>
+    <form class="form-horizontal" style="display: block; float: left">
+        <div>
+            <h3 data-bind="text: publikacija" style="float: left"></h3>
+            <h3 data-bind="text: moment(datum).format('L')" style="float: right"></h3>
+        </div>
+        <div style="clear: both">
+            <div class="control-group">
+                <label class="control-label" for="tipTeksta">Tip aktivnosti *</label>
+                <div class="controls">
+                    <input id="tipTeksta" data-bind="kendoComboBox: { data: tipoviAktivnosti, value: tipAktivnosti, enable: id() == 0 }" />
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="rubrika">Rubrika *</label>
+                <div class="controls">
+                    <input id="rubrika" data-bind="kendoComboBox: { data: rubrike, value: rubrika, dataTextField: 'Naziv', dataValueField: 'ID' }" />
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="radnik">Radnik *</label>
+                <div class="controls">
+                    <input id="radnik" data-bind="kendoComboBox: { data: radnici, value: radnik, dataTextField: 'ImeIPrezime', dataValueField: 'ID' }" />
+                </div>
+            </div>
+            <div class="control-group" data-bind="visible: tipAktivnosti() == 'Napisan tekst'">
+                <label class="control-label" for="tipTeksta">Tip teksta *</label>
+                <div class="controls">
+                    <input id="Text1" data-bind="kendoComboBox: { data: tipoviTeksta, value: tipTeksta, dataTextField: 'Naziv', dataValueField: 'ID' }" />
+                </div>
+            </div>
+            <div class="control-group" data-bind="visible: tipAktivnosti() == 'Napisan tekst'">
+                <label class="control-label" for="naslov">Naslov *</label>
+                <div class="controls">
+                    <input id="naslov" type="text" data-bind="value: naslov" />
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="brojStranice">Broj stranice *</label>
+                <div class="controls">
+                    <input id="brojStranice" type="number" data-bind="value: brojStranice" />
+                </div>
+            </div>
+            <div class="control-group" data-bind="visible: tipAktivnosti() == 'Napisan tekst'">
+                <label class="control-label" for="stubaca">Stubaca</label>
+                <div class="controls">
+                    <input id="stubaca" type="number" data-bind="value: stubaca" />
+                </div>
+            </div>
+            <div class="control-group" data-bind="visible: tipAktivnosti() == 'Napisan tekst'">
+                <label class="control-label" for="cm">Centimetara</label>
+                <div class="controls">
+                    <input id="cm" type="number" data-bind="value: centimetara" />
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="ocena">Ocena</label>
+                <div class="controls">
+                    <input id="ocena" data-bind="kendoComboBox: { data: ocene, value: ocena, dataTextField: 'Opis', dataValueField: 'ID' }" />
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <button data-bind="click: otkazi" class="btn btn-danger">Otkaži</button>
+                    <button data-bind="click: sacuvaj" class="btn btn-success">Sačuvaj</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>

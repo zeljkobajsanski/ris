@@ -1,0 +1,10 @@
+﻿@Html.DevExpress().PopupControl(
+popup =>
+{
+    popup.Name = "izborPopup";
+    popup.Modal = true;
+    popup.HeaderText = "Izbor radne liste";
+    popup.PopupHorizontalAlign = PopupHorizontalAlign.WindowCenter;
+    popup.PopupVerticalAlign = PopupVerticalAlign.WindowCenter;
+    popup.SetContent(() => @Html.RenderPartial("_IzborContent"));
+}).GetHtml()

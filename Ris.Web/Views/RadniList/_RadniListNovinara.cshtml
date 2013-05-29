@@ -1,0 +1,95 @@
+﻿@model Ris.Web.ViewModels.RadniListViewModel
+
+<div id="radniListNovinara">
+    @Html.HiddenFor(x => x.RadniListNovinara.ID)
+    @Html.DevExpress().ComboBox(
+        cb =>
+        {
+            cb.Name = "RadniListNovinara.PublikacijaID";
+            cb.Properties.ClientInstanceName = "cmbPublikacija";
+            cb.Properties.TextField = "Naziv";
+            cb.Properties.ValueType = typeof(int);
+            cb.Properties.ValueField = "ID";
+            cb.ControlStyle.CssClass = "editor";
+            cb.ShowModelErrors = true;
+            cb.ReadOnly = true;
+        }
+    ).BindList(Model.PublikacijeLookup).Bind(Model.RadniListNovinara.PublikacijaID).GetHtml()
+    @Html.DevExpress().DateEdit(
+        d =>
+        {
+            d.Name = "RadniListNovinara.Datum";
+            d.Properties.ClientInstanceName = "dateEditDatum";
+            d.ControlStyle.CssClass = "editor";
+            d.ReadOnly = true;
+        }
+    ).Bind(Model.RadniListNovinara.Datum).GetHtml()
+    @Html.DevExpress().ComboBox(
+        cb =>
+            {
+                cb.Name = "RadniListNovinara.RubrikaID";
+                cb.Properties.TextField = "Naziv";
+                cb.Properties.ValueType = typeof (int);
+                cb.Properties.ValueField = "ID";
+                cb.ControlStyle.CssClass = "editor";
+                cb.ShowModelErrors = true;
+            }
+    ).BindList(Model.Rubrike).Bind(Model.RadniListNovinara.RubrikaID).GetHtml()
+    @Html.DevExpress().ComboBox(
+        cb =>
+            {
+                cb.Name = "RadniListNovinara.TipTekstaID";
+                cb.Properties.TextField = "Naziv";
+                cb.Properties.ValueType = typeof(int);
+                cb.Properties.ValueField = "ID";
+                cb.ControlStyle.CssClass = "editor";
+                cb.ShowModelErrors = true;
+            }
+    ).BindList(Model.TipoviTeksta).Bind(Model.RadniListNovinara.TipTekstaID).GetHtml()
+    @Html.DevExpress().ComboBox(
+        cb =>
+        {
+            cb.Name = "RadniListNovinara.RadnikID";
+            cb.Properties.ClientInstanceName = "cbRadnici";
+            cb.Properties.TextField = "ImeIPrezime";
+            cb.Properties.ValueType = typeof (int);
+            cb.Properties.ValueField = "ID";
+            cb.ControlStyle.CssClass = "editor";
+            cb.ShowModelErrors = true;
+        }
+    ).BindList(Model.Radnici).Bind(Model.RadniListNovinara.RadnikID).GetHtml()
+    @Html.DevExpress().TextBox(
+        tb =>
+            {
+                tb.Name = "RadniListNovinara.NaslovTeksta";
+                tb.ControlStyle.CssClass = "editor";
+                tb.ShowModelErrors = true;
+            }
+         ).Bind(Model.RadniListNovinara.NaslovTeksta).GetHtml()    
+    @Html.DevExpress().SpinEdit(
+        s =>
+        {
+            s.Name = "RadniListNovinara.BrojStranice";
+            s.Properties.ClientInstanceName = "spinBrojStranice";
+            s.Properties.MinValue = 1;
+            s.Properties.MaxValue = 200;
+            s.ControlStyle.CssClass = "editor";
+        }
+    ).Bind(Model.RadniListNovinara.BrojStranice).GetHtml()
+    @Html.DevExpress().SpinEdit(
+        s =>
+        {
+            s.Name = "RadniListNovinara.Stubaca";
+            s.Properties.ClientInstanceName = "spinStubaca";
+            s.ControlStyle.CssClass = "editor";
+        }
+    ).Bind(Model.RadniListNovinara.Stubaca).GetHtml()
+    @Html.DevExpress().SpinEdit(
+        s =>
+        {
+            s.Name = "RadniListNovinara.Centimetara";
+            s.Properties.ClientInstanceName = "spinCentimetara";
+            s.ControlStyle.CssClass = "editor";
+        }
+    ).Bind(Model.RadniListNovinara.Centimetara).GetHtml()
+</div>

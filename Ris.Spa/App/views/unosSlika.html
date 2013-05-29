@@ -1,0 +1,7 @@
+﻿<section>
+    <form data-bind="submit: sacuvaj">
+        <input data-bind="value: naziv"/>
+        <input type="file" name="file" data-bind="kendoUpload: { async: {saveUrl: 'api/Data/SacuvajSliku'}, success: uspesanUpload, localization: { select: 'Izaberi...', remove: 'Obriši' }, multiple: true }"/>
+        <input type="submit" value="Sačuvaj" class="k-button"/>
+    </form>
+</section>

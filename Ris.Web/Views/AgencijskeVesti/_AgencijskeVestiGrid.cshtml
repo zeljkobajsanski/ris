@@ -1,0 +1,52 @@
+@using System.Web.UI.WebControls
+@model Ris.Web.ViewModels.AgencijskeVestiViewModel
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "AgencijskeVestiGrid";
+        settings.CallbackRouteValues = new { Controller = "AgencijskeVesti", Action = "AgencijskeVestiGrid" };
+        settings.Width = Unit.Percentage(90);
+
+        settings.KeyFieldName = "ID";
+
+        settings.SettingsPager.Visible = true;
+        settings.SettingsBehavior.AllowFocusedRow = true;
+        settings.Columns.Add(c =>
+                                 {
+                                     c.FieldName = "DatumPrijema";
+                                     c.Caption = "Datum";
+                                     c.ColumnType = MVCxGridViewColumnType.DateEdit;
+                                     var dc = (DateEditProperties) c.PropertiesEdit;
+                                     dc.DisplayFormatString = "dd.MM.yyyy HH:mm";
+                                     c.Width = Unit.Pixel(100);
+                                 });
+        settings.Columns.Add(c =>
+                                 {
+                                     c.FieldName = "AgencijaID";
+                                     c.Caption = "Agencija";
+                                     c.ColumnType = MVCxGridViewColumnType.ComboBox;
+                                     c.Width = Unit.Pixel(40);
+                                     var cc = (ComboBoxProperties) c.PropertiesEdit;
+                                     cc.TextField = "Naziv";
+                                     cc.ValueType = typeof (int);
+                                     cc.ValueField = "ID";
+                                     cc.DataSource = Model.Agencije;
+                                     cc.DropDownStyle = DropDownStyle.DropDown;
+                                     cc.ClientInstanceName = "CmbAgencije";
+                                 });
+        settings.Columns.Add(c =>
+                                 {
+                                     c.FieldName = "Subject";
+                                     c.Caption = "Naslov";
+                                     c.Settings.AllowAutoFilter = DefaultBoolean.False;
+                                     //c.Width = Unit.Pixel(110);
+                                 });
+        settings.ClientSideEvents.FocusedRowChanged = "gridSelectionChanged";
+        settings.ClientSideEvents.BeginCallback = "agencijskeVestiGridBeginCallback";
+        settings.Settings.ShowStatusBar = GridViewStatusBarMode.Visible;
+        settings.SettingsLoadingPanel.Mode = GridViewLoadingPanelMode.ShowOnStatusBar;
+        settings.SettingsLoadingPanel.Enabled = true;
+        settings.SettingsLoadingPanel.Text = "Pretraga u toku...";
+    });
+}
+@grid.Bind(Model.AgencijskeVesti).GetHtml()

@@ -1,0 +1,41 @@
+﻿@model Ris.Web.ViewModels.PregledTekstovaViewModel
+
+@{
+    ViewBag.Title = "Pregled tekstova";
+}
+@section scripts
+{
+     <script src="@Url.Content("~/Scripts/ris.http.js")"></script>
+    <script src="@Url.Content("~/Scripts/ris.redakcija.js")" type="text/javascript"></script>
+     <script>
+         RIS.http.root = '@Url.Content("~/")'
+    </script>
+}
+<div>
+    @Html.DevExpress().DateEdit(
+        d =>
+        {
+            d.Name = "Datum";
+            d.Properties.ClientInstanceName = "datum";
+            d.ControlStyle.CssClass = "editor";
+        }
+         ).Bind(Model.Datum).GetHtml()
+
+    @Html.Action("PublikacijeComboBox")
+    
+    @Html.Action("VratiRubrikeZaPregledTekstova")
+    
+    @Html.DevExpress().Button(
+        b =>
+        {
+            b.Name = "btnPrikazi";
+            b.Text = "Prikaži";
+            b.ControlStyle.CssClass = "button";
+            b.ClientSideEvents.Click = "RIS.Redakcija.prikaziTekstove";
+        }
+         ).GetHtml()
+</div>
+
+<div id="pregledTekstova">
+    @Html.Partial("PregledTekstovaGrid")
+</div>

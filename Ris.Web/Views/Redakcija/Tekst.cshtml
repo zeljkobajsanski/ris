@@ -1,0 +1,186 @@
+﻿@using System.Web.UI.WebControls
+@using Ris.Web.ViewModels
+@using Rs.Dnevnik.Ris.Core.Model
+@model Ris.Web.ViewModels.UnosTekstaViewModel
+
+@section scripts
+{
+    <script src="@Url.Content("~/Scripts/ris.fotoArhiva.js")"></script>
+    <script src="@Url.Content("~/Scripts/ris.http.js")"></script>
+    <script src="@Url.Content("~/Scripts/ris.redakcija.js")" type="text/javascript"></script>
+    <script>
+        RIS.http.root = '@Url.Content("~/")'
+    </script>
+}
+
+@Html.Partial("ToastMessage")
+
+<div id="unosTeksta">
+    @using (Html.BeginForm("Sacuvaj", "Redakcija", FormMethod.Post, new {id = "tekstForm"}))
+    {
+        @Html.HiddenFor(x => x.Tekst.ID)
+        @Html.HiddenFor(x => x.Tekst.AutorID)
+        @Html.HiddenFor(x => x.Tekst.TrenutnoKodID)
+        @Html.HiddenFor(x => x.Tekst.Datum)
+
+        @Html.Action("PublikacijeComboBox", new{idPublikacije = Model.Tekst.PublikacijaID, readOnly = Model.ReadOnly})
+
+        @Html.Action("VratiRubrikeZaUnosTeksta", new{idPublikacije = Model.Tekst.PublikacijaID, idRubrike = Model.Tekst.RubrikaID, readOnly = Model.ReadOnly})
+
+        @Html.DevExpress().ComboBox(s =>
+                                        {
+                                            s.Name = "Tekst.TipTekstaID";
+                                            s.Properties.TextField = "Naziv";
+                                            s.Properties.ValueType = typeof (int);
+                                            s.Properties.ValueField = "ID";
+                                            s.ControlStyle.CssClass = "editor";
+                                            s.ShowModelErrors = true;
+                                            s.Enabled = !Model.ReadOnly;
+                                        }).BindList(Model.TipoviTeksta).Bind(Model.Tekst.TipTekstaID).GetHtml()
+        
+        @*@Html.DevExpress().TextBox(s =>
+        {
+            s.Name = "Tekst.Nadnaslov";
+            s.ShowModelErrors = true;
+            s.Properties.NullText = "Nadnaslov";
+            s.ControlStyle.CssClass = "editor";
+        }).Bind(Model.Tekst.Nadnaslov).GetHtml()*@
+        <div>
+            @Html.DevExpress().TextBox(s =>
+            {
+                s.Name = "Tekst.Naslov";
+                s.ShowModelErrors = true;
+                s.Properties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.ImageWithText;
+                s.Properties.NullText = "Naslov";
+                s.ControlStyle.CssClass = "editor";
+                s.Enabled = !Model.ReadOnly;
+                s.Style.Add("float", "left");
+            }).Bind(Model.Tekst.Naslov).GetHtml()  
+            @Html.DevExpress().Button(
+                btn =>
+                    {
+                        btn.Name = "btnKomentari";
+                        btn.Text = "Komentari (" + Model.Tekst.BrojKomentara + ")";
+                        btn.ClientSideEvents.Click = "RIS.Redakcija.prikaziKomentare";
+                        btn.Style.Add("float", "right");
+                        btn.Style.Add("margin-right", "165px");
+                    }
+            ).GetHtml()  
+        </div>
+        
+        @*@Html.DevExpress().TextBox(s =>
+        {
+            s.Name = "Tekst.Podnaslov";
+            s.ShowModelErrors = true;
+            s.Properties.NullText = "Podnaslov";
+            s.ControlStyle.CssClass = "editor";
+        }).Bind(Model.Tekst.Podnaslov).GetHtml()*@
+    
+        <div style="clear: both;">
+            <div style="float: left">
+                @Html.Partial("_Editor", Model)
+                <div style="float: right">
+                    <p>Ukupan broj karaktera: <span id="brojKaraktera">0</span></p>
+                    <p>Ukupan broj reči: <span id="brojReci">0</span></p>    
+                </div>
+                
+            </div>    
+            <div style="margin-left: 862px">
+                @Html.DevExpress().Button(s =>
+                                              {
+                                                  s.Name = "btnDodajSlike";
+                                                  s.Text = "Dodaj slike";
+                                                  s.Width = Unit.Pixel(118);
+                                                  s.ClientSideEvents.Click = "RIS.FotoArhiva.showDialog";
+                                                  s.Style.Add("visibility", "hidden");
+                                              }).GetHtml()
+                
+                <div id="thumbnails">
+                    @for (int i = 0; i < Model.Tekst.Materijali.Count; i++)
+                    {
+                        <div class="slikaWrapper">
+                            @Html.HiddenFor(x => Model.Tekst.Materijali[i].ID, new {@class = "materijalID"})
+                            @Html.HiddenFor(x => Model.Tekst.Materijali[i].Putanja, new {@class = "materijalPutanja"})
+                            @Html.HiddenFor(x => Model.Tekst.Materijali[i].Thumbnail, new {@class = "materijalThumbnail"})
+                            <img src="@Url.Content("~" + @Model.Tekst.Materijali[i].Thumbnail)" alt='' width=100 height=100 class="slika" data-id="@Model.Tekst.Materijali[i].ID"/>
+                            <img src='@Url.Content("~/Content/images/trash_16x16.png")' alt='' title="Obriši" class="obrisi"/>
+                        </div>
+                    }
+
+                </div>
+                <script>
+                    $("#thumbnails .obrisi").click(RIS.Redakcija.obrisiSliku);
+                    $(".slikaWrapper .slika").click(RIS.Redakcija.preuzmiSliku);
+                </script>
+            </div>
+        </div>
+        
+        <div style="clear: both; width: 860px; padding-top: 4px">
+            
+            <div style="float: right">
+                @Html.DevExpress().Button(s =>
+                                              {
+                                                  s.Name = "btnSaljiNovinaru";
+                                                  s.Text = "Pošalji autoru";
+                                                  s.ControlStyle.CssClass = "inlineBlock";
+                                                  s.ClientSideEvents.Click = "RIS.Redakcija.posaljiNovinaru";
+                                                  s.Enabled = !Model.ReadOnly && Model.SaljiNovinaru;
+                                                  //s.Width = Unit.Pixel(131);
+                                              }).GetHtml()    
+                @Html.DevExpress().Button(s =>
+                                              {
+                                                  s.Name = "btnSaljiUredniku";
+                                                  s.Text = "Pošalji uredniku";
+                                                  s.ControlStyle.CssClass = "inlineBlock";
+                                                  s.ClientSideEvents.Click = "RIS.Redakcija.posaljiUredniku";
+                                                  s.Enabled = !Model.ReadOnly && Model.SaljiUredniku;
+                                                  //s.Width = Unit.Pixel(131);
+                                              }).GetHtml()    
+                @Html.DevExpress().Button(s =>
+                                              {
+                                                  s.Name = "btnSaljiLektoru";
+                                                  s.Text = "Pošalji lektoru";
+                                                  s.ControlStyle.CssClass = "inlineBlock";
+                                                  s.ClientSideEvents.Click = "RIS.Redakcija.posaljiLektoru";
+                                                  s.Enabled = !Model.ReadOnly && Model.SaljiLektoru;
+                                                  //s.Width = Unit.Pixel(131);
+                                              }).GetHtml()  
+                @Html.DevExpress().Button(s =>
+                                              {
+                                                  s.Name = "btnSaljiDtp";
+                                                  s.Text = "Pošalji u DTP";
+                                                  s.ControlStyle.CssClass = "inlineBlock";
+                                                  s.ClientSideEvents.Click = "RIS.Redakcija.posaljiUDTP";
+                                                  s.Enabled = !Model.ReadOnly && Model.SaljiUDTP;
+                                                  //s.Width = Unit.Pixel(131);
+                                              }).GetHtml()    
+            </div>
+            @Html.DevExpress().Button(s =>
+                                          {
+                                              s.Name = "btnSacuvaj";
+                                              s.Text = "Sačuvaj";
+                                              s.UseSubmitBehavior = true;
+                                              s.Enabled = !Model.ReadOnly;
+                                          }).GetHtml() 
+        </div>
+    }    
+</div>
+
+@Html.Action("PretragaFotoArhive", "FotoArhiva")
+
+@Html.DevExpress().LoadingPanel(
+    loader =>
+        {
+            loader.Name = "loader1";
+            loader.ContainerElementID = "html";
+            loader.Text = "Molim sačekajte";
+        }
+).GetHtml()
+
+
+
+@Html.Partial("_KomentariPopup", new KomentariViewModel(){IdTeksta = Model.Tekst.ID, Komentar = new Komentar(){TekstID = Model.Tekst.ID}})
+
+<script>
+    RIS.Redakcija.promenjenTekst();
+</script>

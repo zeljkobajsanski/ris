@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/redakcija.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/toastr.min.css")" rel="stylesheet" />
+    
+    <script src="@Url.Content("~/Scripts/jquery-1.6.2.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
+    @RenderSection("styles", false)
+        @Html.DevExpress().GetStyleSheets( 
+            new StyleSheet { ExtensionSuite = ExtensionSuite.NavigationAndLayout }, 
+            new StyleSheet { ExtensionSuite = ExtensionSuite.Editors }, 
+            new StyleSheet { ExtensionSuite = ExtensionSuite.HtmlEditor }, 
+            new StyleSheet { ExtensionSuite = ExtensionSuite.GridView }, 
+            new StyleSheet { ExtensionSuite = ExtensionSuite.PivotGrid },
+            new StyleSheet { ExtensionSuite = ExtensionSuite.Chart },
+            new StyleSheet { ExtensionSuite = ExtensionSuite.Report },
+	        new StyleSheet { ExtensionSuite = ExtensionSuite.Scheduler },
+	        new StyleSheet { ExtensionSuite = ExtensionSuite.TreeList }
+        )
+        @Html.DevExpress().GetScripts( 
+            new Script { ExtensionSuite = ExtensionSuite.NavigationAndLayout }, 
+            new Script { ExtensionSuite = ExtensionSuite.HtmlEditor }, 
+            new Script { ExtensionSuite = ExtensionSuite.GridView }, 
+            new Script { ExtensionSuite = ExtensionSuite.PivotGrid },
+            new Script { ExtensionSuite = ExtensionSuite.Editors }, 
+            new Script { ExtensionSuite = ExtensionSuite.Chart },
+            new Script { ExtensionSuite = ExtensionSuite.Report },
+	        new Script { ExtensionSuite = ExtensionSuite.Scheduler },
+	        new Script { ExtensionSuite = ExtensionSuite.TreeList }
+        )
+    
+    <script src="@Url.Content("~/Scripts/toastr.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/moment.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/ris.application.js")" type="text/javascript"></script>
+    @RenderSection("scripts", false)
+</head>
+    <body>
+        <header>
+            @Html.Partial("Menu")
+        </header>
+        <div id="mainContent">
+            @RenderBody()    
+        </div>
+    </body>
+</html>

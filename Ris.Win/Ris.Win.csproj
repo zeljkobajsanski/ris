@@ -1,0 +1,361 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4EA291D0-9940-4ED3-AC51-AFF8E81760B7}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Rs.Dnevnik.Ris.Win</RootNamespace>
+    <AssemblyName>Ris.Win</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>newspaper.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.BonusSkins.v12.2, Version=12.2.7.0, Culture=neutral, PublicKeyToken=95fc6c5621878f0a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Data.v12.2, Version=12.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.PivotGrid.v12.2.Core, Version=12.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Printing.v12.2.Core, Version=12.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v12.2, Version=12.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraBars.v12.2, Version=12.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraEditors.v12.2, Version=12.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraGrid.v12.2, Version=12.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraLayout.v12.2, Version=12.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraNavBar.v12.2, Version=12.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraPivotGrid.v12.2, Version=12.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraScheduler.v12.2.Reporting.Extensions, Version=12.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraScheduler.v12.2, Version=12.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraScheduler.v12.2.Core, Version=12.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraScheduler.v12.2.Extensions, Version=12.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=4.3.1.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.4.3.1\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject, Version=3.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Ninject.3.0.1.10\lib\net40\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.Entity">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Alerts\AlertMessage.cs" />
+    <Compile Include="Alerts\AlertMessageType.cs" />
+    <Compile Include="Alerts\PodaciSuOsvezeniAlert.cs" />
+    <Compile Include="Alerts\PodaciSuSnimljeniAlert.cs" />
+    <Compile Include="Editors\Ocena.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Editors\Odeljenje.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Editors\Publikacija.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Editors\Radnik.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Editors\Rubrika.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Editors\Sektor.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Editors\TipTeksta.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="IoC\Container.cs" />
+    <Compile Include="Models\PrikazRadnogLista.cs" />
+    <Compile Include="Modules\IView.cs" />
+    <Compile Include="Modules\IzvestajRadnihNalog\IIzvestajPoDatumuView.cs" />
+    <Compile Include="Modules\IzvestajRadnihNalog\IIzvestajPoRadnicimaView.cs" />
+    <Compile Include="Modules\IzvestajRadnihNalog\IzvestajPoDatumuPresenter.cs" />
+    <Compile Include="Modules\IzvestajRadnihNalog\IzvestajPoDatumuView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\IzvestajRadnihNalog\IzvestajPoDatumuView.Designer.cs">
+      <DependentUpon>IzvestajPoDatumuView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\IzvestajRadnihNalog\IzvestajPoRadnicimaPresenter.cs" />
+    <Compile Include="Modules\IzvestajRadnihNalog\IzvestajPoRadnicimaView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\IzvestajRadnihNalog\IzvestajPoRadnicimaView.Designer.cs">
+      <DependentUpon>IzvestajPoRadnicimaView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Odeljenja\IOdeljenjaView.cs" />
+    <Compile Include="Modules\Odeljenja\OdeljenjaPresenter.cs" />
+    <Compile Include="Modules\Odeljenja\OdeljenjaView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Odeljenja\OdeljenjaView.Designer.cs">
+      <DependentUpon>OdeljenjaView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\PresenterBase.cs" />
+    <Compile Include="Modules\Radnici\IRadniciView.cs" />
+    <Compile Include="Modules\Radnici\RadniciPresenter.cs" />
+    <Compile Include="Modules\Radnici\RadniciView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Radnici\RadniciView.Designer.cs">
+      <DependentUpon>RadniciView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\RadniNalog\DijalogIzbora.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\RadniNalog\DijalogIzbora.Designer.cs">
+      <DependentUpon>DijalogIzbora.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\RadniNalog\IView.cs" />
+    <Compile Include="Modules\RadniNalog\Presenter.cs" />
+    <Compile Include="Modules\RadniNalog\RadniListNovinara.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\RadniNalog\RadniListNovinara.Designer.cs">
+      <DependentUpon>RadniListNovinara.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\RadniNalog\RadniListUrednika.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\RadniNalog\RadniListUrednika.Designer.cs">
+      <DependentUpon>RadniListUrednika.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\RadniNalog\View.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\RadniNalog\View.Designer.cs">
+      <DependentUpon>View.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Rubrike\IRubrikeView.cs" />
+    <Compile Include="Modules\Rubrike\RubrikePresenter.cs" />
+    <Compile Include="Modules\Rubrike\RubrikeView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Rubrike\RubrikeView.Designer.cs">
+      <DependentUpon>RubrikeView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\TipoviTekstova\ITipoviTekstovaView.cs" />
+    <Compile Include="Modules\TipoviTekstova\TipoviTekstovaPresenter.cs" />
+    <Compile Include="Modules\ViewBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shell.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Shell.Designer.cs">
+      <DependentUpon>Shell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\Extensions.cs" />
+    <EmbeddedResource Include="Modules\IzvestajRadnihNalog\IzvestajPoDatumuView.resx">
+      <DependentUpon>IzvestajPoDatumuView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\IzvestajRadnihNalog\IzvestajPoRadnicimaView.resx">
+      <DependentUpon>IzvestajPoRadnicimaView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Odeljenja\OdeljenjaView.resx">
+      <DependentUpon>OdeljenjaView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Radnici\RadniciView.resx">
+      <DependentUpon>RadniciView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\RadniNalog\DijalogIzbora.resx">
+      <DependentUpon>DijalogIzbora.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\RadniNalog\RadniListNovinara.resx">
+      <DependentUpon>RadniListNovinara.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\RadniNalog\RadniListUrednika.resx">
+      <DependentUpon>RadniListUrednika.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\RadniNalog\View.resx">
+      <DependentUpon>View.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Rubrike\RubrikeView.resx">
+      <DependentUpon>RubrikeView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Shell.resx">
+      <DependentUpon>Shell.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="App.config" />
+    <None Include="Images\Ribbon_New_32x32.png" />
+    <None Include="packages.config" />
+    <None Include="Properties\DataSources\Rs.Dnevnik.Ris.Core.Model.Entity.datasource" />
+    <None Include="Properties\DataSources\Rs.Dnevnik.Ris.Core.Model.NovinskaKuca.datasource" />
+    <None Include="Properties\DataSources\Rs.Dnevnik.Ris.Core.Model.Ocena.datasource" />
+    <None Include="Properties\DataSources\Rs.Dnevnik.Ris.Core.Model.Odeljenje.datasource" />
+    <None Include="Properties\DataSources\Rs.Dnevnik.Ris.Core.Model.OstvarenjejRadnogNaloga.datasource" />
+    <None Include="Properties\DataSources\Rs.Dnevnik.Ris.Core.Model.Publikacija.datasource" />
+    <None Include="Properties\DataSources\Rs.Dnevnik.Ris.Core.Model.Radnik.datasource" />
+    <None Include="Properties\DataSources\Rs.Dnevnik.Ris.Core.Model.RadniListNovinara.datasource" />
+    <None Include="Properties\DataSources\Rs.Dnevnik.Ris.Core.Model.RadniListUrednika.datasource" />
+    <None Include="Properties\DataSources\Rs.Dnevnik.Ris.Core.Model.RadniNalog.datasource" />
+    <None Include="Properties\DataSources\Rs.Dnevnik.Ris.Core.Model.Rubrika.datasource" />
+    <None Include="Properties\DataSources\Rs.Dnevnik.Ris.Core.Model.Sektor.datasource" />
+    <None Include="Properties\DataSources\Rs.Dnevnik.Ris.Core.Model.TipAktivnosti.datasource" />
+    <None Include="Properties\DataSources\Rs.Dnevnik.Ris.Core.Model.TipTeksta.datasource" />
+    <None Include="Properties\DataSources\Rs.Dnevnik.Ris.Win.Models.OstvarenjejRadnogNaloga.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ris.Core\Ris.Core.csproj">
+      <Project>{6787f6a1-7518-4012-9aff-479543e482e4}</Project>
+      <Name>Ris.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ris.EntityFramework\Ris.EntityFramework.csproj">
+      <Project>{a1b37089-f7c5-4d33-839e-a9e249ac9a20}</Project>
+      <Name>Ris.EntityFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ris.Interfaces\Ris.Interfaces.csproj">
+      <Project>{b7b97a67-ddb3-4941-a844-7c0e8986fd20}</Project>
+      <Name>Ris.Interfaces</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Images\007_PrintView_16x16_72.png" />
+    <Content Include="Images\007_PrintView_32x32_72.png" />
+    <Content Include="newspaper.ico" />
+    <None Include="Images\prikazi.png" />
+    <None Include="Images\newspaper_16x16.png" />
+    <Content Include="Images\newspaper_24x24.png" />
+    <Content Include="Images\newspaper_32x32.png" />
+    <Content Include="Images\newspaper_48x48.png" />
+    <Content Include="Images\users_16x16.png" />
+    <None Include="Images\Ribbon_Info_32x32.png" />
+    <None Include="Images\Drafts_16x16.png" />
+    <Content Include="Images\error_32x32.png" />
+    <Content Include="Images\info_32x32.png" />
+    <Content Include="Images\warning_32x32.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,13 @@
+﻿#grid {
+    float: left;
+    width: 296px;
+}
+
+#detalj {
+    margin-left: 300px;
+    overflow: hidden;
+}
+
+#btnSave {
+    margin-left: 108px;
+}

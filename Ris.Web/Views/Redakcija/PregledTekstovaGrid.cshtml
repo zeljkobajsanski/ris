@@ -1,0 +1,82 @@
+﻿@using System.Web.UI.WebControls
+@model Ris.Web.ViewModels.PregledTekstovaViewModel
+
+@Html.DevExpress().GridView(
+    gv =>
+    {
+        gv.Name = "gvPregledTekstova";
+        gv.CallbackRouteValues = new {action = "VratiPregledTekstova"};
+        gv.Width = Unit.Percentage(100);
+        gv.Columns.Add("Datum");
+        var c1 = gv.Columns.Add("PublikacijaID", "Publikacija");
+        c1.ColumnType = MVCxGridViewColumnType.ComboBox;
+        var c1Editor = ((ComboBoxProperties) c1.PropertiesEdit);
+        c1Editor.TextField = "Naziv";
+        c1Editor.ValueType = typeof (int);
+        c1Editor.ValueField = "ID";
+        c1Editor.DataSource = Model.Publikacije;
+        var c2 = gv.Columns.Add("RubrikaID", "Rubrika");
+        c2.ColumnType = MVCxGridViewColumnType.ComboBox;
+        var c2Editor = ((ComboBoxProperties)c2.PropertiesEdit);
+        c2Editor.TextField = "Naziv";
+        c2Editor.ValueType = typeof(int);
+        c2Editor.ValueField = "ID";
+        c2Editor.DataSource = Model.Rubrike;
+        var c3 = gv.Columns.Add("Naslov", "Naslov");
+        var c4 = gv.Columns.Add("AutorID", "Autor");
+        c4.ColumnType = MVCxGridViewColumnType.ComboBox;
+        var c4Editor = ((ComboBoxProperties)c4.PropertiesEdit);
+        c4Editor.TextField = "ImeIPrezime";
+        c4Editor.ValueType = typeof(int);
+        c4Editor.ValueField = "ID";
+        c4Editor.DataSource = Model.Radnici;
+        gv.Columns.Add(c =>
+        {
+            c.Width = Unit.Pixel(60);
+            c.SetDataItemTemplateContent(template =>
+            {
+                var tekstId = DataBinder.Eval(template.DataItem, "ID");
+                ViewContext.Writer.WriteLine("<a href='" + @Url.Action("PregledTeksta", new { id = tekstId }) + "'>");
+                @Html.DevExpress().Image(
+                    img =>
+                    {
+                        img.ImageUrl = @Url.Content("~/Content/images/preview_16.png");
+                        img.ToolTip = "Pregledaj";
+                        img.ControlStyle.CssClass = "action";
+                    }
+                ).Render();
+                ViewContext.Writer.WriteLine("</a>");
+                if (Model.DozvoljenaIzmena)
+                {
+                    ViewContext.Writer.WriteLine("<a href='" + @Url.Action("IzmenaTeksta", new { id = tekstId }) + "'>");
+                    @Html.DevExpress().Image(
+                        img =>
+                        {
+                            img.ImageUrl = @Url.Content("~/Content/images/edit.png");
+                            img.ToolTip = "Izmeni";
+                            img.ControlStyle.CssClass = "action";
+                        }
+                    ).Render();
+                    ViewContext.Writer.WriteLine("</a>");    
+                }
+                
+                if (Model.DozvoliBrisanje)
+                {
+                    ViewContext.Writer.WriteLine(string.Format("<a href='#' onclick='RIS.Redakcija.obrisiTekst({0})'>", tekstId));
+                    @Html.DevExpress().Image(
+                        img =>
+                        {
+                            img.ImageUrl = @Url.Content("~/Content/images/cancel_16.png");
+                            img.ToolTip = "Obriši";
+                            img.ControlStyle.CssClass = "action";
+                        }
+                    ).Render();
+                    ViewContext.Writer.WriteLine("</a>");    
+                }
+            });
+        });
+        gv.ClientSideEvents.BeginCallback = "RIS.Redakcija.pregledTekstovaBeginCallback";
+        gv.SettingsText.EmptyDataRow = "Nema podataka za izabrane kriterijume";
+        gv.SettingsLoadingPanel.Text = "Pretraga u toku. Molim sačekajte...";
+    }
+).Bind(Model.Tekstovi).GetHtml()

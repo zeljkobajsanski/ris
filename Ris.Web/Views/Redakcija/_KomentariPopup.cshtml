@@ -1,0 +1,17 @@
+﻿@using System.Web.UI.WebControls
+@model Ris.Web.ViewModels.KomentariViewModel
+
+@Html.DevExpress().PopupControl(
+    popup =>
+        {
+            popup.Name = "komentariPopup";
+            popup.HeaderText = "Komentari";
+            popup.PopupHorizontalAlign = PopupHorizontalAlign.WindowCenter;
+            popup.PopupVerticalAlign = PopupVerticalAlign.WindowCenter;
+            popup.SetContent(() => Html.RenderPartial("_KomentariCallbackPanel", Model));
+            popup.ClientSideEvents.Shown = "RIS.Redakcija.komentariPopupShown";
+            popup.Width = Unit.Pixel(400);
+            popup.Height = Unit.Pixel(500);
+            popup.Modal = true;
+        }
+).GetHtml()

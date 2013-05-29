@@ -1,0 +1,12 @@
+﻿@model Ris.Web.ViewModels.RadniListViewModel
+
+@Html.DevExpress().GridView(
+    grid =>
+        {
+            grid.Name = "radniNaloziGrid";
+            grid.CallbackRouteValues = new {controller = "RadniList", action = "RadniListPartial", idPublikacije = Model.Publikacija, datum = Model.Datum};
+            grid.SettingsBehavior.AllowFocusedRow = true;
+            grid.ClientSideEvents.FocusedRowChanged = "RIS.RadniList.izabranRadniList";
+            grid.KeyFieldName = "ID";
+        }
+).Bind(Model.RadniNalozi).GetHtml()

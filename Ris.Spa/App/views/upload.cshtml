@@ -1,0 +1,7 @@
+﻿<section>
+    <input type="file" name="file" data-bind="kendoUpload: { async: { autoUpload: true, saveUrl: 'api/Data/Upload', }, showFileList: showList, complete: complete, upload: upload }"/>
+    <form action='@Url.Action("SyncUpload", "Data")'>
+        <input type="file" name="file" data-bind="kendoUpload: {}"/>
+        <input type="submit" value="Submit" class="btn"/>
+    </form>
+</section>

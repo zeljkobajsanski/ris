@@ -1,0 +1,33 @@
+﻿<style>
+    .highlight { background-color: yellow }
+</style>
+<section style="font-size: 14px">
+    <div>
+        <form data-bind="submit: pretrazi">
+            <input data-bind="kendoDatePicker: datum" />
+            <div data-bind="kendoComboBox: { data: agencije, dataValueField: 'ID', dataTextField: 'Naziv', value: agencija }"></div>
+            <input type="text" data-bind="value: deoSadrzaja" class="search-query" placeholder="sadržaj e-maila..."/>
+            <div>
+                <input type="submit" value="Pretraži" class="btn" style="margin: 2px 4px 2px 0"/>    
+            </div>
+            
+        </form>
+        
+    </div>
+    <div>
+        <div style="width: 600px;cursor: pointer; float: left">
+            <table data-bind="kendoGrid: {
+                data: mailovi, columns: [{ field: 'Datum', width: 120 }, { field: 'Agencija', width: 120 }, { field: 'Naslov', width: 340 }], change: izabranEmail,
+                selectable: true, pageable: { pageable: true, pageSize: 10 }}">
+            </table>
+            <div data-bind="visible: isBusy">
+                <img src="../../Content/Default/loading.gif" id="spinner" /><span style="margin-left: 4px">Pretraga u toku. Molim sačekajte....</span>
+            </div>
+            
+        </div>
+        <div style="float: right; border: 1px solid rgb(197, 197, 197)">
+            <p id="sadrzaj" style="width: 442px; height: 378px; margin-left: 4px; padding: 4px; text-align: justify; overflow: scroll" data-bind="text: sadrzaj"></p>
+        </div>
+    </div>
+    
+</section>

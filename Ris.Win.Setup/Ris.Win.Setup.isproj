@@ -1,0 +1,48 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+	<PropertyGroup>
+		<!-- Select a Product Configuration -->
+		<InstallShieldProductConfiguration>Express</InstallShieldProductConfiguration>
+		<!-- Select a Visual Studio Configuration / InstallShield Release -->
+		<Configuration>Debug</Configuration>
+		<InstallShieldRelease>$(Configuration)</InstallShieldRelease>
+	</PropertyGroup>
+	<ItemGroup>
+		<!-- The InstallShieldProject item selects the project to build -->
+		<InstallShieldProject Include="$(MSBuildProjectDirectory)\$(MSBuildProjectName).isl"/>
+		<!-- The InstallShieldReleaseFlags sets Release Flags -->
+		<!--<InstallShieldReleaseFlags Include=""/>-->
+		<!-- The InstallShieldMergeModulePath specifies what directories are
+		searched for Merge Modules -->
+		<!--<InstallShieldMergeModulePath Include=""/>-->
+	</ItemGroup>
+	<ItemGroup>
+		<!-- The ProjectReference items refer to any Visual Studio solutions you want to automatically probe for Project Output Groups.  -->
+	</ItemGroup>
+	<ItemGroup>
+		<!-- The TaggedOutputs items allow you to explicitly add extra files to output groups. Each item must include both Name and OutputGroup, as well as TargetPath metadata values. -->
+		<!--<TaggedOutputs Include="C:\My Test Exe.exe">
+			<Name>My Test Project</Name>
+			<OutputGroup>Primary output</OutputGroup>
+			<TargetPath>My Test Exe.exe</TargetPath>
+		</TaggedOutputs> -->
+	</ItemGroup>
+	<Import Project="$(MSBuildExtensionsPath32)\InstallShield\2012SpringLimited\InstallShield.targets"/>
+	<ItemGroup>
+		<ProjectReference Include="..\Ris.Core\Ris.Core.csproj">
+			<Name>Ris.Core</Name>
+			<Project>{6787F6A1-7518-4012-9AFF-479543E482E4}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\Ris.EntityFramework\Ris.EntityFramework.csproj">
+			<Name>Ris.EntityFramework</Name>
+			<Project>{A1B37089-F7C5-4D33-839E-A9E249AC9A20}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\Ris.Interfaces\Ris.Interfaces.csproj">
+			<Name>Ris.Interfaces</Name>
+			<Project>{B7B97A67-DDB3-4941-A844-7C0E8986FD20}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\Ris.Win\Ris.Win.csproj">
+			<Name>Ris.Win</Name>
+			<Project>{4EA291D0-9940-4ED3-AC51-AFF8E81760B7}</Project>
+		</ProjectReference>
+	</ItemGroup>
+</Project>

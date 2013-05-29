@@ -1,0 +1,10 @@
+﻿<div style="width: 320px; height: 200px; background-color: white">
+    <h3>Izbor radne liste</h3>
+    <div>
+        <input data-bind="kendoDatePicker: datum" /><br/>
+        <input data-bind="kendoComboBox: { data: publikacije, value: izabranaPublikacija, dataTextField: 'Naziv', dataValueField: 'ID' }" autofocus/><br/>
+        <button data-bind="click: potvrdi" class="btn">Potvrdi</button>
+    </div>
+    
+
+</div>

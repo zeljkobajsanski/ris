@@ -1,0 +1,24 @@
+﻿@Html.DevExpress().Menu(
+        menu =>
+            {
+                menu.Name = "user";
+                menu.Items.Add(
+                    m =>
+                        {
+                            m.Text = ViewBag.UserName;
+                            m.Image.Url = ViewBag.UserID != null ? @Url.Content("~/Content/images/avatar.png") : @Url.Content("~/Content/images/anonymus.png");
+                            if (ViewBag.UserID != null)
+                            {
+                                m.Items.Add("Moj nalog", "moj_nalog", @Url.Content("~/Content/images/user.png"));
+                                m.Items.Add("Odjavi me", "odjavi_me", @Url.Content("~/Content/images/logout.png")).NavigateUrl = @Url.Action("OdjaviMe", "Prijava");
+                            }
+                            else
+                            {
+                                m.Items.Add("Kreiraj nalog", "kreiraj_nalog", @Url.Content("~/Content/images/user.png"));
+                                m.Items.Add("Prijavi me", "prijavi_me", @Url.Content("~/Content/images/key.png")).NavigateUrl = @Url.Action("Index", "Prijava");
+                            }
+                            
+                        }
+                    );
+            }
+    ).GetHtml()

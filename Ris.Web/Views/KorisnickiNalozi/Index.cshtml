@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Korisnički nalozi";
+}
+@model Ris.Web.ViewModels.KorisnickiNaloziViewModel
+
+@section styles
+{
+    <link href="@Url.Content("~/Content/korisnickiNalozi.css")" rel="stylesheet" />
+}
+
+@section scripts
+{
+    <script src="@Url.Content("~/Scripts/ris.http.js")"></script>
+    <script src="@Url.Content("~/Scripts/app/ris.korisnickiNalozi.js")"></script>
+    <script>
+        RIS.http.root = '@Url.Content("~/")';
+    </script>
+}
+
+<div id="grid">
+    @Html.Partial("_KorisnickiNaloziGrid", Model)
+</div>
+<div id="detalj">
+    @Html.Partial("_KorisnickiNalogCallbackPanel", Model)
+</div>
+@Html.Partial("ToastMessage")

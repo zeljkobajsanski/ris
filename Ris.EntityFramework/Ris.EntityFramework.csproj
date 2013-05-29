@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A1B37089-F7C5-4D33-839E-A9E249AC9A20}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Rs.Dnevnik.Ris.EntityFramework</RootNamespace>
+    <AssemblyName>Ris.EntityFramework</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=4.3.1.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.4.3.1\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Configurations\AgencijeCfg.cs" />
+    <Compile Include="Configurations\AgencijskeVestiCfg.cs" />
+    <Compile Include="Configurations\DatabaseInitializer.cs" />
+    <Compile Include="Configurations\KomentariCfg.cs" />
+    <Compile Include="Configurations\KonfiguracijaCfg.cs" />
+    <Compile Include="Configurations\KorisnickiNaloziCfg.cs" />
+    <Compile Include="Configurations\NovinskeKuceCfg.cs" />
+    <Compile Include="Configurations\OcenaCfg.cs" />
+    <Compile Include="Configurations\OdeljenjaCfg.cs" />
+    <Compile Include="Configurations\PublikacijeCfg.cs" />
+    <Compile Include="Configurations\RadniciCfg.cs" />
+    <Compile Include="Configurations\RadniNalogCfg.cs" />
+    <Compile Include="Configurations\RubrikeCfg.cs" />
+    <Compile Include="Configurations\SektoriCfg.cs" />
+    <Compile Include="Configurations\TekstCfg.cs" />
+    <Compile Include="Configurations\TipTekstaCfg.cs" />
+    <Compile Include="Configurations\UlogeRadnikaCfg.cs" />
+    <Compile Include="DataContext.cs" />
+    <Compile Include="Migrations\201302232156130_InitialCreate.cs" />
+    <Compile Include="Migrations\201302232156130_InitialCreate.Designer.cs">
+      <DependentUpon>201302232156130_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201302232205288_AgencijskeVesti.cs" />
+    <Compile Include="Migrations\201302232205288_AgencijskeVesti.Designer.cs">
+      <DependentUpon>201302232205288_AgencijskeVesti.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\AgencijeRepository.cs" />
+    <Compile Include="Repositories\AgencijskeVestiRepository.cs" />
+    <Compile Include="Repositories\GrupeMaterijalaRepository.cs" />
+    <Compile Include="Repositories\KonfiguracijaRepository.cs" />
+    <Compile Include="Repositories\KonverzijaRepository.cs" />
+    <Compile Include="Repositories\KorisnickiNaloziRepository.cs" />
+    <Compile Include="Repositories\MaterijalRepository.cs" />
+    <Compile Include="Repositories\NovinskeKuceRepository.cs" />
+    <Compile Include="Repositories\OceneRepository.cs" />
+    <Compile Include="Repositories\OdeljenjaRepository.cs" />
+    <Compile Include="Repositories\PublikacijeRepository.cs" />
+    <Compile Include="Repositories\RadniciRepository.cs" />
+    <Compile Include="Repositories\RadniNaloziRepository.cs" />
+    <Compile Include="Repositories\RepositoryBase.cs" />
+    <Compile Include="Repositories\RepositoryFactory.cs" />
+    <Compile Include="Repositories\RubrikeRepository.cs" />
+    <Compile Include="Repositories\SektoriRepository.cs" />
+    <Compile Include="Repositories\TekstoviRepository.cs" />
+    <Compile Include="Repositories\TipoviTekstaRepository.cs" />
+    <Compile Include="Repositories\UlogeRadnikaRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ris.Core\Ris.Core.csproj">
+      <Project>{6787f6a1-7518-4012-9aff-479543e482e4}</Project>
+      <Name>Ris.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ris.Interfaces\Ris.Interfaces.csproj">
+      <Project>{b7b97a67-ddb3-4941-a844-7c0e8986fd20}</Project>
+      <Name>Ris.Interfaces</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,13 @@
+﻿<section>
+    <button class="btn btn-success" data-bind="visible: radneListe().length > 0, click: kreirajNovu">Kreiraj novu</button>
+    <div data-bind="visible: radneListe().length > 0" style="cursor: pointer">
+        <table data-bind="kendoGrid: {
+                          data: radneListe,
+                          columns: ['Datum', 'Publikacija', 'Rubrika', 'Radnik'],
+                          selectable: 'row',
+                          change: izabran}">
+            
+        </table>
+    </div>
+    
+</section>

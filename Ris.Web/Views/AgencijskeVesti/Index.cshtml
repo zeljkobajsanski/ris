@@ -1,0 +1,112 @@
+﻿@using System.Web.UI.WebControls
+@model Ris.Web.ViewModels.AgencijskeVestiViewModel
+@{
+    ViewBag.Title = "Agencijske vesti";
+}
+@section scripts
+{
+    <script src="@Url.Content("~/Scripts/moment.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.highlight-4.js")"></script>
+    <script type="text/javascript">
+        $(function() {
+            $("form").submit(function() {
+                pretrazi();
+                return false;
+            });
+        });
+
+        function gridSelectionChanged(s, e) {
+            var id = s.GetRowKey(s.GetFocusedRowIndex());
+            $.get('@Url.Action("VratiVest")', {id: id}, function(vest) {
+                $("#naslov").text(vest.Subject);
+                if (vest.DatumPrijema != "/Date(-62135596800000)/") {
+                    $("#vreme").text(moment(vest.DatumPrijema).format("DD.MM.YYYY HH:mm"));
+                } else {
+                    $("#vreme").text('');
+                }
+                
+                $("#vest").text(vest.Body);
+                $.get('AgencijskeVesti/PojmoviPretrage', { pojmoviPretrage: sadrzaj.GetValue() }, function(result) {
+                    var $vest = $("#vest");
+                    result.forEach(function(pojam) {
+                        $vest.highlight(pojam);
+                    });
+                });
+            });
+        }
+
+        function pretrazi() {
+            if (!AgencijskeVestiGrid.InCallback()) {
+                AgencijskeVestiGrid.SetFocusedRowIndex(-1);
+                $("#vest").text('');
+                $("#naslov").text('');
+                $("#vreme").text('');
+                AgencijskeVestiGrid.PerformCallback();
+            }
+        }
+
+        function agencijskeVestiGridBeginCallback(s, e) {
+            var datum = Datum.GetValue();
+            if (datum) {
+                e.customArgs['datum'] = moment(datum).format();
+            }
+            e.customArgs['idAgencije'] = Agencija.GetValue();
+            e.customArgs['sadrzaj'] = sadrzaj.GetValue() || undefined;
+        }
+    </script>
+}
+
+<form action="#">
+    @Html.DevExpress().DateEdit(s =>
+    {
+        s.Name = "Datum";
+        s.Properties.DisplayFormatString = "dd.MM.yyyy";
+        s.Properties.NullText = "Datum";
+        s.Properties.ConvertEmptyStringToNull = true;
+        s.ControlStyle.CssClass = "editor";
+    }).Bind(Model.Datum).GetHtml()
+
+    @Html.DevExpress().ComboBox(s =>
+    {
+        s.Name = "Agencija";
+        s.Properties.TextField = "Naziv";
+        s.Properties.ValueType = typeof (int);
+        s.Properties.ValueField = "ID";
+        s.Properties.ConvertEmptyStringToNull = true;
+        s.Properties.NullDisplayText = "Agencija";
+        s.Properties.DropDownStyle = DropDownStyle.DropDown;
+        s.ControlStyle.CssClass = "editor";
+    }).BindList(Model.Agencije).Bind(Model.DefaultAgencija).GetHtml()
+    @Html.DevExpress().TextBox(s =>
+    {
+        s.Name = "sadrzaj";
+        s.Properties.NullDisplayText = "Deo sadržaja";
+        s.Properties.NullText = "Deo sadržaja";
+        s.Properties.ConvertEmptyStringToNull = true;
+        s.ControlStyle.CssClass = "editor";
+    }).GetHtml()
+    @Html.DevExpress().Button(s =>
+    {
+        s.Name = "btnPretrazi";
+        s.Text = "Pretraži";
+        s.UseSubmitBehavior = true;
+        s.ControlStyle.CssClass = "button";
+    }).GetHtml()
+</form>
+<div style="float: left; width: 650px;">
+    @Html.Action("AgencijskeVestiGrid", Model)    
+</div>
+
+<div style="margin-left: 8px; float: left; width: 350px">
+    <div>
+        <strong id="naslov" style="float: left"></strong>    
+        <small id="vreme" style="float: right"></small>    
+    </div>
+    <div style="clear: both; margin-top: 30px; overflow-y: auto; height: 400px; font-size: 8pt; text-align: justify; padding: 4px" id="vest">
+    </div>
+      
+</div>
+
+
+
+

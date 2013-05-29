@@ -1,0 +1,11 @@
+﻿@model Ris.Web.ViewModels.KomentariViewModel
+
+@Html.DevExpress().CallbackPanel(
+    panel =>
+    {
+        panel.Name = "komentariPanel";
+        panel.CallbackRouteValues = new {action = "VratiKomentare", id = Model.IdTeksta};
+        panel.SetContent(() => Html.RenderPartial("_Komentari"));
+        panel.ClientSideEvents.EndCallback = "function(){komentarMemo.Focus();}";
+    }
+).GetHtml()

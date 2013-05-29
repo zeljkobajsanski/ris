@@ -1,0 +1,29 @@
+﻿<div>
+    <div>
+        <select data-bind="kendoComboBox: { data: agencije, dataTextField: 'Naziv', dataValueField: 'ID', value: agencija }"/>
+        <button data-bind="click: refresh">Prikaži</button>
+    </div>
+    <div style="float: left; width: 500px; margin-top: 4px">
+        <table  style="cursor: pointer;" 
+                data-bind="kendoGrid: {
+                                    data: vesti,
+                                    selectable: 'row',
+                                    change: izabran,
+                                    pageable: { pageSize: 15 },
+                                    columns: [{ field: 'Datum', title: 'Datum', width: 150 },
+                                              { field: 'Agencija', title: 'Agencija', width: 80 },
+                                              { field: 'Naslov', title: 'Naslov', width: 250 },
+                                              { field: 'Body', hidden: true }]
+                                    }">
+   
+        </table>
+        
+    </div>
+    <div style="margin-left: 502px; width: 400px">
+        <p data-bind="text: naslov" style="text-align: center; font-weight: bold"></p>
+        <textarea data-bind="value: vest" style="width: 400px; height: 450px;"/>
+    </div>
+    
+    <br/>
+   
+</div>

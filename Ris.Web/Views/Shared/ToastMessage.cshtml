@@ -1,0 +1,20 @@
+﻿@using Ris.Web.Utils.Message
+@{
+    if (TempData["StatusMessage"] != null)
+    {
+        var statusMessage = (StatusMessage)TempData["StatusMessage"];
+        
+            switch (statusMessage.Type) {
+                case StatusMessageType.Info: 
+                    <script>RIS.showInfo('@statusMessage.Message')</script>
+                    break;
+                case StatusMessageType.Success: 
+                    <script>RIS.showSuccess('@statusMessage.Message')</script>
+                    break;
+                case StatusMessageType.Error: 
+                    <script>RIS.showError('@statusMessage.Message')</script>
+                    break;
+                default: break;
+            }
+    }
+}

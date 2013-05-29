@@ -1,0 +1,52 @@
+@using System.Web.UI.WebControls
+@using Ris.Web.Controllers
+@model Ris.Web.ViewModels.UnosTekstaViewModel
+
+@Html.DevExpress().HtmlEditor(s =>
+{
+    RedakcijaController.Customize(s);
+    s.Toolbars.Add(tb =>
+    {
+        tb.Items.Add(new ToolbarCutButton(true));
+        tb.Items.Add(new ToolbarCopyButton());
+        tb.Items.Add(new ToolbarPasteButton());
+        tb.Items.Add(new ToolbarPasteFromWordButton());
+        tb.Items.Add(new ToolbarUndoButton(true));
+        tb.Items.Add(new ToolbarRedoButton());
+        tb.Items.Add(new ToolbarSuperscriptButton(true));
+        tb.Items.Add(new ToolbarSubscriptButton());
+        tb.Items.Add(new ToolbarInsertUnorderedListButton(true));
+        tb.Items.Add(new ToolbarInsertOrderedListButton());
+        tb.Items.Add(new ToolbarIndentButton(true));
+        tb.Items.Add(new ToolbarOutdentButton());
+        var export = new ToolbarExportDropDownButton(true);
+        export.CreateDefaultItems();
+        tb.Items.Add(export);
+        tb.Items.Add(new ToolbarFullscreenButton(true));
+        
+    });
+    s.Toolbars.Add(tb =>
+    {
+        var paragraf = new ToolbarParagraphFormattingEdit(true);
+        paragraf.CreateDefaultItems();
+        tb.Items.Add(paragraf);
+        var font = new ToolbarFontNameEdit();
+        font.CreateDefaultItems();
+        tb.Items.Add(font);
+        var fontSize = new ToolbarFontSizeEdit();
+        fontSize.CreateDefaultItems();
+        tb.Items.Add(fontSize);
+        tb.Items.Add(new ToolbarBoldButton(true));
+        tb.Items.Add(new ToolbarItalicButton());
+        tb.Items.Add(new ToolbarUnderlineButton());
+        tb.Items.Add(new ToolbarJustifyLeftButton(true));
+        tb.Items.Add(new ToolbarJustifyCenterButton());
+        tb.Items.Add(new ToolbarJustifyRightButton());
+        tb.Items.Add(new ToolbarJustifyFullButton());
+    });
+    s.Width = Unit.Pixel(860);
+    s.Height = Unit.Pixel(390);
+    s.ClientSideEvents.HtmlChanged = "RIS.Redakcija.promenjenTekst";
+    s.ExportRouteValues = new {action = "Izvezi"};
+    s.Enabled = !Model.ReadOnly;
+}).Bind(Model.Tekst.Html).GetHtml()

@@ -1,0 +1,86 @@
+﻿@{
+    ViewBag.Title = "Unos slika";
+}
+@using System.Web.UI.WebControls
+@using DevExpress.Web.ASPxProgressBar
+@model Rs.Dnevnik.Ris.Core.Model.MaterijalInfo
+
+<div>
+    @using (Html.BeginForm("Unos", "FotoArhiva", FormMethod.Post, new{enctype="multipart/form-data"}))
+    {
+        <div style="float: left">
+            @Html.DevExpress().TextBox(s =>
+            {
+                s.Name = "Naziv";
+                s.Properties.NullText = "Naziv slike";
+                s.ControlStyle.CssClass = "editor";
+                s.ShowModelErrors = true;
+            }).Bind(Model.Naziv).GetHtml()
+            
+            @Html.DevExpress().ComboBox(s =>
+            {
+                s.Name = "PublikacijaID";
+                s.Properties.TextField = "Naziv";
+                s.Properties.ValueType = typeof (int);
+                s.Properties.ValueField = "ID";
+                s.ControlStyle.CssClass = "editor";
+                s.Properties.NullDisplayText = "Publikacija";
+            }).BindList(ViewBag.Publikacije).Bind(Model.PublikacijaID).GetHtml()
+            
+            @Html.DevExpress().ComboBox(s =>
+            {
+                s.Name = "GrupaMaterijalaID";
+                s.Properties.TextField = "Naziv";
+                s.Properties.ValueType = typeof (int);
+                s.Properties.ValueField = "ID";
+                s.ControlStyle.CssClass = "editor";
+                s.Properties.NullDisplayText = "Grupa materijala";
+            }).BindList(ViewBag.GrupeMaterijala).Bind(Model.GrupaMaterijalaID).GetHtml()
+
+            @Html.DevExpress().Memo(s =>
+            {
+                s.Name = "Opis";
+                s.ControlStyle.CssClass = "editor";
+                s.Height = Unit.Pixel(200);
+                s.Properties.NullText = "Opis";
+            }).Bind(Model.Opis).GetHtml()
+            
+            @Html.DevExpress().TextBox(s =>
+            {
+                s.Name = "Tagovi";
+                s.ControlStyle.CssClass = "editor";
+                s.Properties.NullText = "Tagovi...";
+            }).Bind(Model.Tagovi).GetHtml()
+
+            @Html.DevExpress().DateEdit(s =>
+            {
+                s.Name = "Kreiran";
+                s.Properties.NullText = "Kreiran";
+                s.ControlStyle.CssClass = "editor";
+            }).Bind(Model.Kreiran).GetHtml()
+            
+            @Html.DevExpress().Button(s =>
+            {
+                s.Name = "btnSacuvaj";
+                s.Text = "Sačuvaj";
+                s.UseSubmitBehavior = true;
+                s.ControlStyle.CssClass = "button";
+            }).GetHtml()
+        </div>
+        <div style="padding-top: 4px;">
+            @Html.DevExpress().UploadControl(s =>
+            {
+                s.Name = "Upload";
+                s.ShowAddRemoveButtons = true;
+                s.ShowClearFileSelectionButton = true;
+                s.ShowProgressPanel = true;
+                s.AddButton.Text = "Dodaj";
+                s.RemoveButton.Text = "Obriši";
+                //s.Width = Unit.Pixel(293);
+                s.ProgressBarSettings.DisplayMode = ProgressBarDisplayMode.Percentage;
+            }).GetHtml()    
+        </div>
+    }
+</div>
+
+@Html.Partial("ToastMessage")
